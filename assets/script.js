@@ -23,6 +23,14 @@
   const menu = document.querySelector('.menu');
   if(!menu) return;
   const btn = menu.querySelector('button');
-  btn.addEventListener('click', (e)=>{ e.stopPropagation(); menu.classList.toggle('open'); });
-  document.addEventListener('click', ()=> menu.classList.remove('open'));
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const isOpen = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+  document.addEventListener('click', ()=>{
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  });
 })();
